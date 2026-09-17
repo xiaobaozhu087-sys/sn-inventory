@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SN库存管理系统</title>
-<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js">
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script>
 // ====== Embedded Data (loaded dynamically) ======
 let EMBEDDED_INVENTORY={};
 let EMBEDDED_MAPPING={};
@@ -143,9 +144,9 @@ async function loadAllData(){
   document.getElementById('invBody').innerHTML='<tr><td colspan="12" class="loading">⏳ 加载中...</td></tr>';
   try{
     const base = window.location.href.replace(/index\.html.*/, '').replace(/\/$/, '');
-    const dataBase = base + '/data';
+    const dataBase = base;
     // Load inventory
-    const invRes = await fetch(dataBase + '/' + currentCountry.code + '.json');
+    const invRes = await fetch(base + '/' + currentCountry.code + '.json');
     if(invRes.ok){
       inventoryData = await invRes.json();
     }else{
@@ -171,8 +172,7 @@ async function loadAllData(){
 async function loadInventory(){
   document.getElementById('invBody').innerHTML='<tr><td colspan="12" class="loading">⏳ 加载中...</td></tr>';
   try{
-    const base = window.location.href.replace(/index\.html.*/, '').replace(/\/$/, '');
-    const invRes = await fetch(base + '/data/' + currentCountry.code + '.json');
+    const invRes = await fetch('./' + currentCountry.code + '.json');
     if(invRes.ok){
       inventoryData = await invRes.json();
     }
@@ -578,5 +578,6 @@ function deleteUser(uname){
 });
 
 // ====== Embedded Data ======
+</script>
 </body>
 </html>
